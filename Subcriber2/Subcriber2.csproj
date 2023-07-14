@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RabbitMQLib\RabbitMQLib.csproj">
-      <Private>True</Private>
-    </ProjectReference>
+    <ProjectReference Include="..\RabbitMQLib\RabbitMQSubcriber.csproj" />
   </ItemGroup>
 
 </Project>

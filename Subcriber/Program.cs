@@ -1,41 +1,51 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using RabbitMQ.Client.Events;
-using RabbitMQLib;
-using RabbitMQLib.Constants;
-using RabbitMQLib.Interface;
-using System.Text;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using RabbitMQSubcriber.Common.Enums;
+using RabbitMQSubcriber.DependencyInjectionExtensions;
+using RabbitMQSubcriber.Interface;
 
-namespace Subcriber
+internal class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        static async Task Main(string[] args)
+        var serviceProvider = new ServiceCollection()
+                    .AddLogging(loggingBuilder =>
+                    {
+                        loggingBuilder.SetMinimumLevel(LogLevel.Trace);
+                    })
+                    .AddRabbitMQCore(option =>
+                    {
+                        option.HostName = "10.10.74.40";
+                        option.UserName = "rabbitmq";
+                        option.Password = "Epay2023";
+                        option.Port = 5672;
+                    })
+                    .BuildServiceProvider();
+
+        var queueService = serviceProvider.GetRequiredService<IQueueService>();
+
+        var subcriber = queueService.CreateSubscriber(option =>
         {
-            var builder = new ConfigurationBuilder().AddJsonFile($"appsettings.json", true, true);
-
-            //setup our DI
-            var serviceProvider = new ServiceCollection()
-                .AddCommonService(builder.Build())
-                .BuildServiceProvider();
-
-            var consumerService = serviceProvider.GetService<IConsumerService>();
-
-            AsyncEventHandler<BasicDeliverEventArgs> received = async (sender, @event) =>
+            option.ExchangeOrQueue = ExchangeOrQueueEnum.Exchange;
+            option.ExchangeName = "ExchangeTest.1";
+            option.QueueName = "queue.2";
+            option.ExchangeType = ExchangeTypeEnum.headers;
+            option.AutoDelete = false;
+            option.AutoAck = false;
+            option.RoutingKeys = new HashSet<string>()
             {
-                Console.WriteLine("Start Received...");
-                var body = @event.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine($"Message received: {message}");
-
-                consumerService!.CancelMessage(@event.DeliveryTag);
-
-                await Task.Yield();
+                "queue.2"
             };
+            option.QueueBindArgs.Add("x-match", "any");
+            option.QueueBindArgs.Add("q2", "queue 2");
+        });
 
-            await consumerService!.ReadMessgaes(QueueNameConstant.DefaultExchangeName, QueueNameConstant.DefaultQueueName, received);
+        subcriber.Subscribe(opt =>
+        {
+            Console.WriteLine("sub 1 called: {0}", opt.ToString());
+            subcriber.Acknowledge(opt.DeliveryTag);
+        });
 
-            Console.ReadKey();
-        }
+        Console.ReadKey();
     }
 }

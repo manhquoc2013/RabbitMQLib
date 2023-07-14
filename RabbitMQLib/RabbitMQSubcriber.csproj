@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AnalysisLevel>6.0</AnalysisLevel>
+		<NeutralLanguage>vi</NeutralLanguage>
+		<Copyright>EPAY JSC</Copyright>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<SignAssembly>False</SignAssembly>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<Title>RabbitMQ - Subcriber</Title>
+		<Authors>RabbitMQ</Authors>
+		<Product>RabbitMQ - Subcriber</Product>
+		<Description>RabbitMq - Subcriber Client for .NET Core</Description>
+		<Company>EPAY JSC</Company>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+		<PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
+	</ItemGroup>
+
+</Project>

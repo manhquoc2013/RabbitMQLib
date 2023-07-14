@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33808.371
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQLib", "RabbitMQLib\RabbitMQLib.csproj", "{C6518CF8-0A84-48CE-B7FA-9703A9F44A7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQSubcriber", "RabbitMQLib\RabbitMQSubcriber.csproj", "{C6518CF8-0A84-48CE-B7FA-9703A9F44A7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subcriber", "Subcriber\Subcriber.csproj", "{178DF653-8F59-4FE9-9989-58E83DBDE815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subcriber", "Subcriber\Subcriber.csproj", "{178DF653-8F59-4FE9-9989-58E83DBDE815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publisher", "Publisher\Publisher.csproj", "{A02395FB-EDDE-4554-9D62-5D58E6CB3149}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subcriber2", "Subcriber2\Subcriber2.csproj", "{69A85669-A11F-4B51-8EF7-4A9B7B5C4464}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{4A4271AA-2984-448C-BC2A-C80B2EA7C8DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8A4826AE-3F69-4161-9C0E-846D5C1E417C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,13 +27,18 @@ Global
 		{178DF653-8F59-4FE9-9989-58E83DBDE815}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{178DF653-8F59-4FE9-9989-58E83DBDE815}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{178DF653-8F59-4FE9-9989-58E83DBDE815}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A02395FB-EDDE-4554-9D62-5D58E6CB3149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A02395FB-EDDE-4554-9D62-5D58E6CB3149}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A02395FB-EDDE-4554-9D62-5D58E6CB3149}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A02395FB-EDDE-4554-9D62-5D58E6CB3149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A85669-A11F-4B51-8EF7-4A9B7B5C4464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A85669-A11F-4B51-8EF7-4A9B7B5C4464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A85669-A11F-4B51-8EF7-4A9B7B5C4464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A85669-A11F-4B51-8EF7-4A9B7B5C4464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C6518CF8-0A84-48CE-B7FA-9703A9F44A7E} = {8A4826AE-3F69-4161-9C0E-846D5C1E417C}
+		{178DF653-8F59-4FE9-9989-58E83DBDE815} = {4A4271AA-2984-448C-BC2A-C80B2EA7C8DC}
+		{69A85669-A11F-4B51-8EF7-4A9B7B5C4464} = {4A4271AA-2984-448C-BC2A-C80B2EA7C8DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C636D7AF-966C-410B-810E-81C1A2AB465E}
