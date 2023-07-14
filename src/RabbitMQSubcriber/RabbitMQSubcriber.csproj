@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AnalysisLevel>6.0</AnalysisLevel>
-		<NeutralLanguage>vi</NeutralLanguage>
+		<NeutralLanguage>vi-VN</NeutralLanguage>
 		<Copyright>EPAY JSC</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<SignAssembly>False</SignAssembly>
@@ -15,6 +15,7 @@
 		<Product>RabbitMQ - Subcriber</Product>
 		<Description>RabbitMq - Subcriber Client for .NET Core</Description>
 		<Company>EPAY JSC</Company>
+		<PackageOutputPath>..\Nuget</PackageOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>

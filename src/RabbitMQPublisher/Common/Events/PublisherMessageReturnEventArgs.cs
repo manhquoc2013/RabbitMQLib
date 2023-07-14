@@ -1,4 +1,4 @@
-﻿namespace RabbitMQSubcriber.Common.Events
+﻿namespace RabbitMQPublisher.Common.Events
 {
     /// <summary>
     /// Define event model when sending mesage is occurring error
