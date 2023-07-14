@@ -249,6 +249,20 @@ namespace RabbitMQPublisher.Services
                     props.Expiration = message.Expiration;
                 }
 
+                if (_options.BindArguments != null && _options.BindArguments.Any())
+                {
+                    foreach (var item in _options.BindArguments)
+                    {
+                        if (props.Headers == null)
+                        {
+                            props.Headers = new Dictionary<string, object>();
+                        }
+
+                        props.Headers.Add(item.Key, item.Value);
+                    }
+
+                }
+
                 if (_options.ExchangeOrQueue == ExchangeOrQueueEnum.Exchange)
                 {
                     _channel.BasicPublish(_options.ExchangeName, _options.RoutingKeys.Count > 0 ? _options.RoutingKeys.First() : "", _options.MandatoryPublish, props, new ReadOnlyMemory<byte>(Encoding.UTF8.GetBytes(message.Message)));

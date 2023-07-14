@@ -17,6 +17,9 @@
 		<Company>EPAY JSC</Company>
 		<PackageOutputPath>..\Nuget</PackageOutputPath>
 		<PackageId>RabbitMQ.Subcriber</PackageId>
+		<AssemblyVersion>1.0.1</AssemblyVersion>
+		<FileVersion>1.0.1</FileVersion>
+		<PackageVersion>1.0.1-alpha1</PackageVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
