@@ -52,8 +52,8 @@ var subcriber = queueService.CreateSubscriber(option =>
     {
         "queue.1"
     };
-    option.QueueBindArgs.Add("x-match", "any");
-    option.QueueBindArgs.Add("q1", "queue 1");
+    option.BindArguments.Add("x-match", "any");
+    option.BindArguments.Add("q1", "queue 1");
 });
 
 subcriber.Subscribe(opt =>

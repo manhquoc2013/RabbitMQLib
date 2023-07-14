@@ -28,7 +28,7 @@
 	<ItemGroup>
 		<PackageReference Include="Log4NetCoreEx" Version="1.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-		<PackageReference Include="RabbitMQSubcriber" Version="1.0.0" />
+		<PackageReference Include="RabbitMQ.Subcriber" Version="1.0.0" />
 	</ItemGroup>
 
 </Project>

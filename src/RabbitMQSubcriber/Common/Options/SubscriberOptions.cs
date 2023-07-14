@@ -95,6 +95,6 @@ namespace RabbitMQSubcriber.Common.Options
         /// <summary>
         /// 
         /// </summary>
-        public IDictionary<string, object> QueueBindArgs { get; set; } = new Dictionary<string, object>();
+        public IDictionary<string, object> BindArguments { get; set; } = new Dictionary<string, object>();
     }
 }

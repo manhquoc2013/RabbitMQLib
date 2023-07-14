@@ -36,8 +36,8 @@ internal class Program
             {
                 "queue.2"
             };
-            option.QueueBindArgs.Add("x-match", "any");
-            option.QueueBindArgs.Add("q2", "queue 2");
+            option.BindArguments.Add("x-match", "any");
+            option.BindArguments.Add("q2", "queue 2");
         });
 
         subcriber.Subscribe(opt =>

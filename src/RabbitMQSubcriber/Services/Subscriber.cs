@@ -238,7 +238,7 @@ namespace RabbitMQSubcriber.Services
                         queue: _options.QueueName,
                         exchange: _options.ExchangeName,
                         routingKey: _options.RoutingKeys.Count > 0 ? _options.RoutingKeys.First() : "",
-                        arguments: _options.QueueBindArgs != null && _options.QueueBindArgs.Any() ? _options.QueueBindArgs : null
+                        arguments: _options.BindArguments != null && _options.BindArguments.Any() ? _options.BindArguments : null
                     );
 
                     _queueName = result.QueueName;
@@ -258,7 +258,7 @@ namespace RabbitMQSubcriber.Services
                         queue: result.QueueName,
                         exchange: _options.ExchangeName,
                         routingKey: _options.RoutingKeys.Count > 0 ? _options.RoutingKeys.First() : "",
-                        arguments: _options.QueueBindArgs != null && _options.QueueBindArgs.Any() ? _options.QueueBindArgs : null
+                        arguments: _options.BindArguments != null && _options.BindArguments.Any() ? _options.BindArguments : null
                     );
 
                     _queueName = result.QueueName;

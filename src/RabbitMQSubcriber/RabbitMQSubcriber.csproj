@@ -16,6 +16,7 @@
 		<Description>RabbitMq - Subcriber Client for .NET Core</Description>
 		<Company>EPAY JSC</Company>
 		<PackageOutputPath>..\Nuget</PackageOutputPath>
+		<PackageId>RabbitMQ.Subcriber</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>
