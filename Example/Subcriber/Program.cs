@@ -32,10 +32,7 @@ internal class Program
             option.ExchangeType = ExchangeTypeEnum.headers;
             option.AutoDelete = false;
             option.AutoAck = false;
-            option.RoutingKeys = new HashSet<string>()
-            {
-                "queue.2"
-            };
+            option.RoutingKeys.Add("queue.2");
             option.BindArguments.Add("x-match", "any");
             option.BindArguments.Add("q2", "queue 2");
         });
