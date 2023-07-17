@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using RabbitMQPublisher.Common.Options;
-using RabbitMQPublisher.Interface;
-using RabbitMQPublisher.Services;
+using RabbitMQSubscriber.Common.Options;
+using RabbitMQSubscriber.Interface;
+using RabbitMQSubscriber.Services;
 
-namespace RabbitMQPublisher.DependencyInjectionExtensions
+namespace RabbitMQSubscriber.DependencyInjectionExtensions
 {
     public static class RabbitMqCoreExtensions
     {

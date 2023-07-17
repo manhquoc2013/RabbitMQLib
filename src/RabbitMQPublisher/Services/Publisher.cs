@@ -124,10 +124,10 @@ namespace RabbitMQPublisher.Services
 
         private void CreateExchangeOrQueueActual()
         {
+            IDictionary<string, object> args = new Dictionary<string, object>();
+
             if (_options.ExchangeOrQueue == ExchangeOrQueueEnum.Exchange)
             {
-                IDictionary<string, object> args = new Dictionary<string, object>();
-
                 if (!string.IsNullOrWhiteSpace(_options.AlternateExchange))
                 {
                     args.Add(ArgumentStringConstant.AlternateExchange, _options.AlternateExchange);
@@ -141,60 +141,58 @@ namespace RabbitMQPublisher.Services
                     arguments: args
                 );
             }
-            else if (_options.ExchangeOrQueue == ExchangeOrQueueEnum.Queue)
+
+            args = new Dictionary<string, object>();
+
+            if (_options.MessageTTL >= 0)
             {
-                IDictionary<string, object> args = new Dictionary<string, object>();
-
-                if (_options.MessageTTL >= 0)
-                {
-                    args.Add(ArgumentStringConstant.MessageTTL, _options.MessageTTL);
-                }
-
-                if (_options.AutoExpires >= 0)
-                {
-                    args.Add(ArgumentStringConstant.AutoExpires, _options.AutoExpires);
-                }
-
-                if (_options.MaxLength >= 0)
-                {
-                    args.Add(ArgumentStringConstant.MaxLength, _options.MaxLength);
-                }
-
-                if (_options.MaxLengthBytes >= 0)
-                {
-                    args.Add(ArgumentStringConstant.MaxLengthBytes, _options.MaxLengthBytes);
-                }
-
-                if (_options.OverflowBehavior != OverflowBehaviorEnum.None)
-                {
-                    if (_options.OverflowBehavior == OverflowBehaviorEnum.DropHead)
-                    {
-                        args.Add(ArgumentStringConstant.OverflowBehavior, ArgumentStringConstant.OverflowBehaviorDropHead);
-                    }
-                    else if (_options.OverflowBehavior == OverflowBehaviorEnum.RejectPublish)
-                    {
-                        args.Add(ArgumentStringConstant.OverflowBehavior, ArgumentStringConstant.OverflowBehaviorRejectPublish);
-                    }
-                }
-
-                if (!string.IsNullOrWhiteSpace(_options.DeadLetterExchange))
-                {
-                    args.Add(ArgumentStringConstant.DeadLetterExchange, _options.DeadLetterExchange);
-                }
-
-                if (!string.IsNullOrWhiteSpace(_options.DeadLetterRoutingKey))
-                {
-                    args.Add(ArgumentStringConstant.DeadLetterRoutingKey, _options.DeadLetterRoutingKey);
-                }
-
-                _channel.QueueDeclare(
-                    queue: _options.QueueName,
-                    durable: _options.Durable,
-                    exclusive: _options.Exclusive,
-                    autoDelete: _options.AutoDelete,
-                    arguments: args
-                );
+                args.Add(ArgumentStringConstant.MessageTTL, _options.MessageTTL);
             }
+
+            if (_options.AutoExpires >= 0)
+            {
+                args.Add(ArgumentStringConstant.AutoExpires, _options.AutoExpires);
+            }
+
+            if (_options.MaxLength >= 0)
+            {
+                args.Add(ArgumentStringConstant.MaxLength, _options.MaxLength);
+            }
+
+            if (_options.MaxLengthBytes >= 0)
+            {
+                args.Add(ArgumentStringConstant.MaxLengthBytes, _options.MaxLengthBytes);
+            }
+
+            if (_options.OverflowBehavior != OverflowBehaviorEnum.None)
+            {
+                if (_options.OverflowBehavior == OverflowBehaviorEnum.DropHead)
+                {
+                    args.Add(ArgumentStringConstant.OverflowBehavior, ArgumentStringConstant.OverflowBehaviorDropHead);
+                }
+                else if (_options.OverflowBehavior == OverflowBehaviorEnum.RejectPublish)
+                {
+                    args.Add(ArgumentStringConstant.OverflowBehavior, ArgumentStringConstant.OverflowBehaviorRejectPublish);
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(_options.DeadLetterExchange))
+            {
+                args.Add(ArgumentStringConstant.DeadLetterExchange, _options.DeadLetterExchange);
+            }
+
+            if (!string.IsNullOrWhiteSpace(_options.DeadLetterRoutingKey))
+            {
+                args.Add(ArgumentStringConstant.DeadLetterRoutingKey, _options.DeadLetterRoutingKey);
+            }
+
+            _channel.QueueDeclare(
+                queue: _options.QueueName,
+                durable: _options.Durable,
+                exclusive: _options.Exclusive,
+                autoDelete: _options.AutoDelete,
+                arguments: args
+            );
         }
 
         private void CreateExchangeOrQueue()

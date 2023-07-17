@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33808.371
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQSubcriber", "src\RabbitMQSubcriber\RabbitMQSubcriber.csproj", "{C6518CF8-0A84-48CE-B7FA-9703A9F44A7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQSubscriber", "src\RabbitMQSubscriber\RabbitMQSubscriber.csproj", "{C6518CF8-0A84-48CE-B7FA-9703A9F44A7E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subcriber", "Example\Subcriber\Subcriber.csproj", "{178DF653-8F59-4FE9-9989-58E83DBDE815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber", "Example\Subscriber\Subscriber.csproj", "{178DF653-8F59-4FE9-9989-58E83DBDE815}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subcriber2", "Example\Subcriber2\Subcriber2.csproj", "{69A85669-A11F-4B51-8EF7-4A9B7B5C4464}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber2", "Example\Subscriber2\Subscriber2.csproj", "{69A85669-A11F-4B51-8EF7-4A9B7B5C4464}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQPublisher", "src\RabbitMQPublisher\RabbitMQPublisher.csproj", "{0ED51B44-D435-4B30-9943-F70D1B3DB897}"
 EndProject
@@ -15,7 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{BF0D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A8063DB1-5823-4E67-9A50-A52EAEEB62E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publisher", "Publisher\Publisher.csproj", "{265DE09E-A5F0-46B6-8BA6-A46CA414354F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publisher", "Example\Publisher\Publisher.csproj", "{265DE09E-A5F0-46B6-8BA6-A46CA414354F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{D359884B-F3CF-46BA-BCF4-E2D82B4B71CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQSubscriber.UnitTests", "UnitTests\RabbitMQSubscriber.UnitTests\RabbitMQSubscriber.UnitTests.csproj", "{DF11E135-CF55-4302-99AE-E9CD9657E609}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublisherPerf", "PublisherPerf\PublisherPerf.csproj", "{0D6C238B-659E-40EA-BA8B-2ACE523A5B99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,14 @@ Global
 		{265DE09E-A5F0-46B6-8BA6-A46CA414354F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{265DE09E-A5F0-46B6-8BA6-A46CA414354F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{265DE09E-A5F0-46B6-8BA6-A46CA414354F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF11E135-CF55-4302-99AE-E9CD9657E609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF11E135-CF55-4302-99AE-E9CD9657E609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF11E135-CF55-4302-99AE-E9CD9657E609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF11E135-CF55-4302-99AE-E9CD9657E609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D6C238B-659E-40EA-BA8B-2ACE523A5B99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D6C238B-659E-40EA-BA8B-2ACE523A5B99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D6C238B-659E-40EA-BA8B-2ACE523A5B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D6C238B-659E-40EA-BA8B-2ACE523A5B99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +67,8 @@ Global
 		{69A85669-A11F-4B51-8EF7-4A9B7B5C4464} = {BF0D5BEC-D2EC-4746-B69F-FA1D6836A02D}
 		{0ED51B44-D435-4B30-9943-F70D1B3DB897} = {A8063DB1-5823-4E67-9A50-A52EAEEB62E1}
 		{265DE09E-A5F0-46B6-8BA6-A46CA414354F} = {BF0D5BEC-D2EC-4746-B69F-FA1D6836A02D}
+		{DF11E135-CF55-4302-99AE-E9CD9657E609} = {D359884B-F3CF-46BA-BCF4-E2D82B4B71CC}
+		{0D6C238B-659E-40EA-BA8B-2ACE523A5B99} = {BF0D5BEC-D2EC-4746-B69F-FA1D6836A02D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C636D7AF-966C-410B-810E-81C1A2AB465E}

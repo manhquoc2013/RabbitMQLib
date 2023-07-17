@@ -4,28 +4,23 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Title>RabbitMQ - Publisher</Title>
-		<Authors>RabbitMQ</Authors>
-		<Company>EPAY JSC</Company>
-		<Product>RabbitMQ - Publisher</Product>
-		<Description>RabbitMq - Publisher Client for .NET Core</Description>
-		<Copyright>EPAY JSC</Copyright>
+		<AnalysisLevel>6.0</AnalysisLevel>
 		<NeutralLanguage>vi-VN</NeutralLanguage>
+		<Copyright>EPAY JSC</Copyright>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<SignAssembly>False</SignAssembly>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<Title>RabbitMQ - Subscriber</Title>
+		<Authors>RabbitMQ</Authors>
+		<Product>RabbitMQ - Subscriber</Product>
+		<Description>RabbitMq - Subscriber Client for .NET Core</Description>
+		<Company>EPAY JSC</Company>
 		<PackageOutputPath>..\Nuget</PackageOutputPath>
-		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<PackageId>RabbitMQ.Publisher</PackageId>
+		<PackageId>RabbitMQ.Subscriber</PackageId>
 		<AssemblyVersion>1.0.1</AssemblyVersion>
 		<FileVersion>1.0.1</FileVersion>
-		<PackageVersion>1.0.1-alpha4</PackageVersion>
+		<PackageVersion>1.0.1-alpha2</PackageVersion>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<None Include="readme.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
