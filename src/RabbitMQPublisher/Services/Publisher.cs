@@ -193,6 +193,16 @@ namespace RabbitMQPublisher.Services
                 autoDelete: _options.AutoDelete,
                 arguments: args
             );
+
+            if (!string.IsNullOrEmpty(_options.ExchangeName))
+            {
+                _channel.QueueBind(
+                    queue: _options.QueueName,
+                    exchange: _options.ExchangeName,
+                    routingKey: _options.RoutingKeys.Count > 0 ? _options.RoutingKeys.First() : "",
+                    arguments: _options.BindArguments != null && _options.BindArguments.Any() ? _options.BindArguments : null
+                );
+            }
         }
 
         private void CreateExchangeOrQueue()

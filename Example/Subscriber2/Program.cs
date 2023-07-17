@@ -1,7 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
-using RabbitMQSubcriber.Common.Enums;
-using RabbitMQSubcriber.DependencyInjectionExtensions;
-using RabbitMQSubcriber.Interface;
+using RabbitMQSubscriber.Common.Enums;
+using RabbitMQSubscriber.DependencyInjectionExtensions;
+using RabbitMQSubscriber.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 

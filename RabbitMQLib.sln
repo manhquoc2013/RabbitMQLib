@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.33808.371
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQSubscriber", "src\RabbitMQSubscriber\RabbitMQSubscriber.csproj", "{C6518CF8-0A84-48CE-B7FA-9703A9F44A7E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber", "Example\Subscriber\Subscriber.csproj", "{178DF653-8F59-4FE9-9989-58E83DBDE815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubscriberPref", "Example\Subscriber\SubscriberPref.csproj", "{178DF653-8F59-4FE9-9989-58E83DBDE815}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber2", "Example\Subscriber2\Subscriber2.csproj", "{69A85669-A11F-4B51-8EF7-4A9B7B5C4464}"
 EndProject
