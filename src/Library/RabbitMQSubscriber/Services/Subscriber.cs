@@ -46,8 +46,6 @@ namespace RabbitMQSubscriber.Services
         {
             _channel = _queueService.Connection.CreateModel();
 
-            _channel.BasicQos(_options.PrefetchSize, _options.PrefetchCount, false);
-
             // register events
             _channel.BasicAcks += _channel_BasicAcks;
             _channel.BasicNacks += _channel_BasicNacks;
@@ -62,6 +60,8 @@ namespace RabbitMQSubscriber.Services
             {
                 CreateExchangeOrQueue();
             }
+
+            _channel.BasicQos(_options.PrefetchSize, _options.PrefetchCount, false);
 
             _consumer = new AsyncEventingBasicConsumer(_channel);
             _consumer.Received += _consumer_Received;
@@ -415,7 +415,7 @@ namespace RabbitMQSubscriber.Services
         /// 
         /// </summary>
         /// <param name="DeliveryTag"></param>
-        public void Acknowledge(ulong deliveryTag)
+        public void Acknowledge(ulong deliveryTag, bool multiple = false)
         {
             if (_options.AutoAck)
             {
@@ -424,7 +424,7 @@ namespace RabbitMQSubscriber.Services
 
             try
             {
-                _channel.BasicAck(deliveryTag, false);
+                _channel.BasicAck(deliveryTag, multiple);
             }
             catch (Exception ex)
             {
@@ -437,7 +437,7 @@ namespace RabbitMQSubscriber.Services
         /// 
         /// </summary>
         /// <param name="DeliveryTag"></param>
-        public void NotAcknowledge(ulong deliveryTag)
+        public void NotAcknowledge(ulong deliveryTag, bool multiple = false)
         {
             if (_options.AutoAck)
             {
@@ -446,7 +446,7 @@ namespace RabbitMQSubscriber.Services
 
             try
             {
-                _channel.BasicNack(deliveryTag, false, _options.RequeueNack);
+                _channel.BasicNack(deliveryTag, multiple, _options.RequeueNack);
             }
             catch (Exception ex)
             {

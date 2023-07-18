@@ -28,7 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\RabbitMQSubscriber\RabbitMQSubscriber.csproj" />
+		<ProjectReference Include="..\..\Library\RabbitMQSubscriber\RabbitMQSubscriber.csproj" />
 	</ItemGroup>
 
 </Project>

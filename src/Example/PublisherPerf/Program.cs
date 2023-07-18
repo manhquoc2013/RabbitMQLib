@@ -151,7 +151,7 @@ internal class Program
                     maxRequestPerThread = (maxLength - 1) - ((threadNum - 1) * maxRequestPerThread);
                 }
 
-                tasks.Add(Task.Run(async () =>
+                tasks.Add(Task.Run(() =>
                 {
                     int i = 0;
 

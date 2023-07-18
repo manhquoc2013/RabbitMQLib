@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQSubscriber.Common.Enums;
 using RabbitMQSubscriber.DependencyInjectionExtensions;
@@ -72,9 +73,6 @@ internal class Program
     {
         try
         {
-            DateTime dateNow = DateTime.Now;
-            double totalMilliseconds = (dateNow - (msg?.Date ?? dateNow)).TotalMilliseconds;
-
             string dicKey = "Less than 10ms";
             if (!reports.ContainsKey(dicKey))
                 reports.Add(dicKey, 0);
@@ -95,6 +93,8 @@ internal class Program
             if (!reports.ContainsKey(dicKey))
                 reports.Add(dicKey, 0);
 
+            DateTime dateNow = DateTime.Now;
+            double totalMilliseconds = (dateNow - (msg?.Date ?? dateNow)).TotalMilliseconds;
 
             if (totalMilliseconds < 10)
             {
