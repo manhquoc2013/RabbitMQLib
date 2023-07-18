@@ -25,7 +25,7 @@ internal class Program
 
         var queueService = serviceProvider.GetRequiredService<IQueueService>();
 
-        Console.WriteLine("Start program Receive message to UI");
+        Console.WriteLine("Start program Receive message");
 
         var subscriber = queueService.CreateSubscriber(option =>
         {
@@ -75,66 +75,51 @@ internal class Program
             DateTime dateNow = DateTime.Now;
             double totalMilliseconds = (dateNow - (msg?.Date ?? dateNow)).TotalMilliseconds;
 
-            string dicKey = "";
+            string dicKey = "Less than 10ms";
+            if (!reports.ContainsKey(dicKey))
+                reports.Add(dicKey, 0);
+
+            dicKey = "Less than 20ms";
+            if (!reports.ContainsKey(dicKey))
+                reports.Add(dicKey, 0);
+
+            dicKey = "Less than 50ms";
+            if (!reports.ContainsKey(dicKey))
+                reports.Add(dicKey, 0);
+
+            dicKey = "Less than 100ms";
+            if (!reports.ContainsKey(dicKey))
+                reports.Add(dicKey, 0);
+
+            dicKey = "Over 100ms";
+            if (!reports.ContainsKey(dicKey))
+                reports.Add(dicKey, 0);
+
+
             if (totalMilliseconds < 10)
             {
                 dicKey = "Less than 10ms";
-                if (reports.ContainsKey(dicKey))
-                {
-                    reports[dicKey]++;
-                }
-                else
-                {
-                    reports.Add(dicKey, 1);
-                }
+                reports[dicKey]++;
             }
             else if (totalMilliseconds < 20)
             {
                 dicKey = "Less than 20ms";
-                if (reports.ContainsKey(dicKey))
-                {
-                    reports[dicKey]++;
-                }
-                else
-                {
-                    reports.Add(dicKey, 1);
-                }
+                reports[dicKey]++;
             }
             else if (totalMilliseconds < 50)
             {
                 dicKey = "Less than 50ms";
-                if (reports.ContainsKey(dicKey))
-                {
-                    reports[dicKey]++;
-                }
-                else
-                {
-                    reports.Add(dicKey, 1);
-                }
+                reports[dicKey]++;
             }
             else if (totalMilliseconds < 100)
             {
                 dicKey = "Less than 100ms";
-                if (reports.ContainsKey(dicKey))
-                {
-                    reports[dicKey]++;
-                }
-                else
-                {
-                    reports.Add(dicKey, 1);
-                }
+                reports[dicKey]++;
             }
             else
             {
                 dicKey = "Over 100ms";
-                if (reports.ContainsKey(dicKey))
-                {
-                    reports[dicKey]++;
-                }
-                else
-                {
-                    reports.Add(dicKey, 1);
-                }
+                reports[dicKey]++;
             }
 
             Console.WriteLine($"Message: {msg?.Msg}. End time: {dateNow.ToString("yyyy/MM/dd HH:mm:ss.ffff")}. Response time: {(dateNow - (msg?.Date ?? dateNow)).TotalMilliseconds}ms");
@@ -146,7 +131,7 @@ internal class Program
                 Console.WriteLine();
                 Console.WriteLine();
 
-                int tableWidth = 50;
+                int tableWidth = 75;
 
                 PrintLine(tableWidth);
                 PrintRow(tableWidth, "Response time", "Count");
@@ -159,6 +144,8 @@ internal class Program
                 }
 
                 reports.Clear();
+                Console.WriteLine();
+                Console.WriteLine();
             }
         }
         catch (Exception ex)

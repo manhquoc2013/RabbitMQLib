@@ -8,7 +8,7 @@ using System.Text.Json;
 
 internal class Program
 {
-    private static async Task Main(string[] args)
+    private static void Main(string[] args)
     {
         var serviceProvider = new ServiceCollection()
                     .AddLogging(loggingBuilder =>
@@ -132,7 +132,7 @@ internal class Program
                     }
                 }
             }
-            // Stops Receving Keys Once Enter is Pressed
+            // Stops Receiving Keys Once Enter is Pressed
             while (key.Key != ConsoleKey.Enter);
 
             int.TryParse(_val, out threadNum);
@@ -163,7 +163,7 @@ internal class Program
                         {
                             Message = JsonSerializer.Serialize(new
                             {
-                                Msg = $"UI control Msg no. {(i + 1).ToString("000")}. Start time: {dateNow.ToString("yyyy/MM/dd HH:mm:ss.ffff")}",
+                                Msg = $"Msg no. {(i + 1).ToString("000")}. Start time: {dateNow.ToString("yyyy/MM/dd HH:mm:ss.ffff")}",
                                 Content = "There are many different kinds of animals that live in China. Tigers and leopards are animals that live in China's forests in the north",
                                 Type = "UI",
                                 IsEnd = false,
@@ -180,27 +180,27 @@ internal class Program
                 }));
             }
 
-            Task.WaitAll(tasks.ToArray());
-
-            DateTime dateNow = DateTime.Now;
-            var message = new RabbitMessageOutbound()
+            Task.WhenAll(tasks.ToArray()).ContinueWith(t =>
             {
-                Message = JsonSerializer.Serialize(new
+                DateTime dateNow = DateTime.Now;
+                var message = new RabbitMessageOutbound()
                 {
-                    Msg = $"UI control Msg no. {maxLength.ToString("000")}. Start time: {dateNow.ToString("yyyy/MM/dd HH:mm:ss.ffff")}",
-                    Content = "There are many different kinds of animals that live in China. Tigers and leopards are animals that live in China's forests in the north",
-                    Type = "UI",
-                    IsStart = false,
-                    IsEnd = true,
-                    Index = maxLength,
-                    Id = Guid.NewGuid(),
-                    Date = dateNow
-                })
-            };
+                    Message = JsonSerializer.Serialize(new
+                    {
+                        Msg = $"Msg no. {maxLength.ToString("000")}. Start time: {dateNow.ToString("yyyy/MM/dd HH:mm:ss.ffff")}",
+                        Content = "There are many different kinds of animals that live in China. Tigers and leopards are animals that live in China's forests in the north",
+                        Type = "UI",
+                        IsStart = false,
+                        IsEnd = true,
+                        Index = maxLength,
+                        Id = Guid.NewGuid(),
+                        Date = dateNow
+                    })
+                };
 
-            publisher.SendMessage(message);
-
-            Console.WriteLine();
+                publisher.SendMessage(message);
+                Console.WriteLine();
+            });
         }
     }
 }
