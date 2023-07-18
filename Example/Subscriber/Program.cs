@@ -64,7 +64,6 @@ internal class Program
         public string? Content { get; set; }
         public DateTime Date { get; set; }
         public string Type { get; set; } = string.Empty;
-        public bool IsStart { get; set; } = false;
         public bool IsEnd { get; set; } = false;
         public long Index { get; set; } = 0;
         public Guid Id { get; set; } = Guid.Empty;
@@ -73,11 +72,6 @@ internal class Program
     {
         try
         {
-            if (msg?.IsStart == true)
-            {
-                reports.Clear();
-            }
-
             DateTime dateNow = DateTime.Now;
             double totalMilliseconds = (dateNow - (msg?.Date ?? dateNow)).TotalMilliseconds;
 
@@ -163,6 +157,8 @@ internal class Program
                     PrintRow(tableWidth, item.Key, item.Value.ToString("#,##0"));
                     PrintLine(tableWidth);
                 }
+
+                reports.Clear();
             }
         }
         catch (Exception ex)

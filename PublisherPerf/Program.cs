@@ -8,7 +8,7 @@ using System.Text.Json;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         var serviceProvider = new ServiceCollection()
                     .AddLogging(loggingBuilder =>
@@ -44,9 +44,9 @@ internal class Program
         while (!_quitFlag)
         {
             ConsoleKeyInfo key;
-            int i = 0;
             int maxLength = 500;
             int maxRequestPerSec = 100;
+            int threadNum = 2;
             string _val = "";
 
             Console.WriteLine("Input request times");
@@ -106,32 +106,99 @@ internal class Program
             while (key.Key != ConsoleKey.Enter);
 
             int.TryParse(_val, out maxRequestPerSec);
+            _val = string.Empty;
+
+            Console.WriteLine();
+            Console.WriteLine("Input thread to run");
+            do
+            {
+                key = Console.ReadKey(true);
+                if (key.Key != ConsoleKey.Backspace)
+                {
+                    double val = 0;
+                    bool _x = double.TryParse(key.KeyChar.ToString(), out val);
+                    if (_x)
+                    {
+                        _val += key.KeyChar;
+                        Console.Write(key.KeyChar);
+                    }
+                }
+                else
+                {
+                    if (key.Key == ConsoleKey.Backspace && _val.Length > 0)
+                    {
+                        _val = _val.Substring(0, (_val.Length - 1));
+                        Console.Write("\b \b");
+                    }
+                }
+            }
+            // Stops Receving Keys Once Enter is Pressed
+            while (key.Key != ConsoleKey.Enter);
+
+            int.TryParse(_val, out threadNum);
+            _val = string.Empty;
 
             Console.WriteLine();
 
-            while (i < maxLength)
+            Console.WriteLine($"Request {maxLength.ToString("#,##0")} with {maxRequestPerSec.ToString("#,##0")} per seconds and {threadNum} thread");
+
+            var tasks = new List<Task>();
+            for (int threadNo = 0; threadNo < threadNum; threadNo++)
             {
-                Thread.Sleep(1000 / maxRequestPerSec);
-                DateTime dateNow = DateTime.Now;
-                var message = new RabbitMessageOutbound()
+                int maxRequestPerThread = (maxLength - 1) / threadNum;
+                if (threadNo == threadNum - 1)
                 {
-                    Message = JsonSerializer.Serialize(new
+                    maxRequestPerThread = (maxLength - 1) - ((threadNum - 1) * maxRequestPerThread);
+                }
+
+                tasks.Add(Task.Run(async () =>
+                {
+                    int i = 0;
+
+                    while (i < maxRequestPerThread)
                     {
-                        Msg = $"UI control Msg no. {(i + 1).ToString("000")}. Start time: {dateNow.ToString("yyyy/MM/dd HH:mm:ss.ffff")}",
-                        Content = "There are many different kinds of animals that live in China. Tigers and leopards are animals that live in China's forests in the north",
-                        Type = "UI",
-                        IsStart = i == 0,
-                        IsEnd = i == (maxLength - 1),
-                        Index = i,
-                        Id = Guid.NewGuid(),
-                        Date = DateTime.Now
-                    })
-                };
+                        Thread.Sleep(1000 / maxRequestPerSec);
+                        DateTime dateNow = DateTime.Now;
+                        var message = new RabbitMessageOutbound()
+                        {
+                            Message = JsonSerializer.Serialize(new
+                            {
+                                Msg = $"UI control Msg no. {(i + 1).ToString("000")}. Start time: {dateNow.ToString("yyyy/MM/dd HH:mm:ss.ffff")}",
+                                Content = "There are many different kinds of animals that live in China. Tigers and leopards are animals that live in China's forests in the north",
+                                Type = "UI",
+                                IsEnd = false,
+                                Index = i,
+                                Id = Guid.NewGuid(),
+                                Date = dateNow
+                            })
+                        };
 
-                publisher.SendMessage(message);
+                        publisher.SendMessage(message);
 
-                i++;
+                        i++;
+                    }
+                }));
             }
+
+            Task.WaitAll(tasks.ToArray());
+
+            DateTime dateNow = DateTime.Now;
+            var message = new RabbitMessageOutbound()
+            {
+                Message = JsonSerializer.Serialize(new
+                {
+                    Msg = $"UI control Msg no. {maxLength.ToString("000")}. Start time: {dateNow.ToString("yyyy/MM/dd HH:mm:ss.ffff")}",
+                    Content = "There are many different kinds of animals that live in China. Tigers and leopards are animals that live in China's forests in the north",
+                    Type = "UI",
+                    IsStart = false,
+                    IsEnd = true,
+                    Index = maxLength,
+                    Id = Guid.NewGuid(),
+                    Date = dateNow
+                })
+            };
+
+            publisher.SendMessage(message);
 
             Console.WriteLine();
         }
