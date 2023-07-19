@@ -140,7 +140,15 @@ internal class Program
 
                 Console.WriteLine($"Start send message to queue {queueName} with id \"{data.Id}\"");
 
-                nextTimeToSendMessage = index == 1000 ? dateNow.AddMinutes(2) : dateNow.AddMilliseconds(1000 / 50);
+                if (index == 1000)
+                {
+                    nextTimeToSendMessage = dateNow.AddMinutes(1);
+                    index = 0;
+                }
+                else
+                {
+                    nextTimeToSendMessage = dateNow.AddMilliseconds(1000 / 50);
+                }
             }
         }
     }
